@@ -1,0 +1,32 @@
+name: Frontend-FE-Integration
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+
+jobs:  
+
+  build:
+
+    runs-on: ubuntu-latest
+
+   
+    steps:
+        - name: Repository checkout
+          uses: actions/checkout@v2
+        
+        - name: Execute Remote SSH & Run Pipeline
+          uses: garygrossgarten/github-action-ssh@release
+          with: 
+            host: ${{secrets.HOST}}
+            username: ${{secrets.USERNAME}}
+            privatekey: ${{secrets.SSH_SECRET}}
+            command: |
+              cd /opt/
+              sudo su
+              git checkout main
+              git pull
+              sudo chmod -R u=rwx,g=rwx,o+wx .
