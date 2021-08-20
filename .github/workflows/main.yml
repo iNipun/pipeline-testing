@@ -25,7 +25,7 @@ jobs:
             username: ${{secrets.USERNAME}}
             privatekey: ${{secrets.SSH_SECRET}}
             command: |
-              cd /opt/
+              cd /opt/pipeline-testing
               sudo su
               git checkout main
               git pull
